@@ -1,5 +1,5 @@
 import * as React from 'react';
-import useAuth from '../helpers/useAuth';
+import useAuth from '../../helpers/useAuth';
 
 export default function Dashboard({ code }) {
     const accessToken = useAuth(code);

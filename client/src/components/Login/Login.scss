@@ -1,0 +1,17 @@
+$spotify-colour: #1DB954;
+
+.login-btn {
+    color: #fff;
+    font-size: 1.4em;
+    background-color: $spotify-colour;
+    padding: 5px 12px;
+    border-radius: 5px;
+    text-decoration: none;
+    -webkit-box-shadow: 0px 5px 15px 0px #000000; 
+    box-shadow: 0px 5px 15px 0px #000000;
+    transition: all .2s ease-in-out;
+
+    &:hover {
+        background-color: darken($spotify-colour, 5%);
+    }
+}
