@@ -1,7 +1,11 @@
 .container {
+    &-dashboard,
     &-login {
         display: flex;
         justify-content: center;
+    }
+
+    &-login {
         align-items: center;
         height: 100vh;
     }

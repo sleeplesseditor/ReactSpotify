@@ -1,0 +1,13 @@
+.dashboard-search {
+    margin: 1rem;
+    padding: 0.5rem;
+}
+
+input[type=text] {
+    width: 10%;
+    transition: width 0.4s ease-in-out;
+}
+
+input[type=text]:focus {
+    width: 40%;
+}
