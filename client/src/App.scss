@@ -5,6 +5,11 @@
         justify-content: center;
     }
 
+    &-dashboard {
+        flex-direction: column;
+        align-items: center;
+    }
+
     &-login {
         align-items: center;
         height: 100vh;

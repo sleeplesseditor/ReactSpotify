@@ -1,3 +1,5 @@
+$font-primary: #000;
+
 .dashboard-search {
     margin: 1rem;
     padding: 0.5rem;
@@ -10,4 +12,36 @@ input[type=text] {
 
 input[type=text]:focus {
     width: 40%;
+}
+
+.search-results {
+    &-item {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: 0.5rem 1rem;
+        border: 1px solid black;
+        border-radius: 5px;
+        cursor: pointer;
+        margin: 0.25rem 0;
+        transition: all .2s ease-in-out;
+
+        &:hover {
+            background: #ccc;
+        }
+
+        &-img {
+            height: 64px;
+            width: 64px;
+            margin-right: 1rem;
+        }
+
+        h2 {
+
+        }
+
+        h3 {
+            color: lighten($font-primary, 30%);
+        }
+    }
 }
