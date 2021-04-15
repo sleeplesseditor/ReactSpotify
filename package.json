@@ -1,0 +1,28 @@
+{
+  "name": "ReactSpotify",
+  "version": "1.0.0",
+  "description": "An experiment in the use of React with the Spotify API, inspired by Web Dev Simplified's [tutorial](https://www.youtube.com/watch?v=Xcet6msf3eE&t=1s).",
+  "main": "index.js",
+  "scripts": {
+    "client-install": "cd client && npm install",
+    "server-install": "cd server && npm install",
+    "app-install": "concurrently \"npm run server-install\" \"npm run client-install\"",
+    "server-start": "cd server && npm run devStart",
+    "client-start": "cd client && npm run start",
+    "dev": "concurrently \"npm run server-start\" \"npm run client-start\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sleeplesseditor/ReactSpotify.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sleeplesseditor/ReactSpotify/issues"
+  },
+  "homepage": "https://github.com/sleeplesseditor/ReactSpotify#readme",
+  "dependencies": {
+    "concurrently": "^6.0.2"
+  }
+}

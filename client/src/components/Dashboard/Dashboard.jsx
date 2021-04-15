@@ -1,4 +1,5 @@
 import * as React from 'react';
+import Player from '../Player';
 import useAuth from '../../helpers/useAuth';
 import { CLIENT_ID } from '../../config';
 import SpotifyWebApi from 'spotify-web-api-node';
@@ -12,6 +13,11 @@ export default function Dashboard({ code }) {
     const accessToken = useAuth(code);
     const [search, setSearch] = React.useState('');
     const [searchResults, setSearchResults] = React.useState([]);
+    const [playingTrack, setPlayingTrack] = React.useState();
+
+    const selectTrack = (track) => {
+        setPlayingTrack(track)
+    }
 
     React.useEffect(() => {
         if(!accessToken) return
@@ -55,7 +61,7 @@ export default function Dashboard({ code }) {
             />
             <div className="search-results">
                 {searchResults.map(item => (
-                    <div className="search-results-item" key={item.uri}>
+                    <div className="search-results-item" key={item.uri} onClick={() => selectTrack(item)}>
                         <img className="search-results-item-img" src={item.albumUrl} alt="" />
                         <div>
                             <h2>{item.title}</h2>
@@ -63,6 +69,9 @@ export default function Dashboard({ code }) {
                         </div>
                     </div>
                 ))}
+            </div>
+            <div>
+                <Player accessToken={accessToken} trackUri={playingTrack?.uri} />
             </div>
         </div>
     )

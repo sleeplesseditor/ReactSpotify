@@ -15,11 +15,17 @@ input[type=text]:focus {
 }
 
 .search-results {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(1, 4fr);
+    grid-gap: 1rem;
+    padding: 1rem;
+
     &-item {
         display: flex;
         flex-direction: row;
         align-items: center;
-        padding: 0.5rem 1rem;
+        padding: 0rem 1rem;
         border: 1px solid black;
         border-radius: 5px;
         cursor: pointer;
