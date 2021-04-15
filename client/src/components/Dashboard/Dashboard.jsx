@@ -82,10 +82,27 @@ export default function Dashboard({ code }) {
                 type="text"
                 value={search}
             />
-            <div className={!lyrics ? "search-results" : "lyrics-results"}>
+            {searchResults.length === 0 && playingTrack ? (
+                <>
+                    <div className="search-results-item">
+                            <img className="search-results-item-img" src={playingTrack.albumUrl} alt="" />
+                            <div>
+                                <h3>{playingTrack.title}</h3>
+                                <p>{playingTrack.album.name}</p>
+                                <h4>{playingTrack.artist}</h4>
+                            </div>
+                        </div>
+                    <div className="lyrics-results">
+                        <div className="lyric-content">
+                        
+                        <p>{lyrics}</p>
+                        </div>
+                    </div>
+                </>
+            ) : (
+                <div className="search-results">
                 {searchResults.map(item => (
                     <div className="search-results-item" key={item.uri} onClick={() => selectTrack(item)}>
-                        {console.log('ALBUM', item)}
                         <img className="search-results-item-img" src={item.albumUrl} alt="" />
                         <div>
                             <h3>{item.title}</h3>
@@ -94,12 +111,8 @@ export default function Dashboard({ code }) {
                         </div>
                     </div>
                 ))}
-                {searchResults.length === 0 && (
-                    <div className="lyric-content">
-                        <p>{lyrics}</p>
-                    </div>
-                )}
             </div>
+            )}
             <div>
                 <Player accessToken={accessToken} trackUri={playingTrack?.uri} />
             </div>
