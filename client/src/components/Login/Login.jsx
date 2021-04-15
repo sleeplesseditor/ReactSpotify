@@ -5,9 +5,12 @@ import './Login.scss';
 export default function Login() {
     return (
         <div className="container-login">
-            <a className="login-btn" href={AUTH_URL}>
-                Login with Spotify
-            </a>
+            <div className="login-btn-container">
+                <h3>React Spotify Player</h3>
+                <a className="login-btn" href={AUTH_URL}>
+                    Login with Spotify
+                </a>
+            </div>
         </div>
     )
 }

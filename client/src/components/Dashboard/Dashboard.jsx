@@ -4,6 +4,7 @@ import useAuth from '../../helpers/useAuth';
 import { CLIENT_ID } from '../../config';
 import SpotifyWebApi from 'spotify-web-api-node';
 import './dashboard.scss';
+import axios from 'axios';
 
 const spotifyApi = new SpotifyWebApi({
     clientId: CLIENT_ID
@@ -14,10 +15,31 @@ export default function Dashboard({ code }) {
     const [search, setSearch] = React.useState('');
     const [searchResults, setSearchResults] = React.useState([]);
     const [playingTrack, setPlayingTrack] = React.useState();
+    const [lyrics, setLyrics] = React.useState('');
+
+    const searchTrack = (value) => {
+        setLyrics('')
+        setSearch(value)
+    }
 
     const selectTrack = (track) => {
         setPlayingTrack(track)
+        setSearch('')
+        setLyrics('')
     }
+
+    React.useEffect(() => {
+        if(!playingTrack) return
+
+        axios.get('http://localhost:3001/lyrics', {
+            params: {
+                track: playingTrack.title,
+                artist: playingTrack.artist
+            }
+        }).then(res => {
+            setLyrics(res.data.lyrics)
+        })
+    }, [playingTrack])
 
     React.useEffect(() => {
         if(!accessToken) return
@@ -39,6 +61,7 @@ export default function Dashboard({ code }) {
                 }, track.album.images[0])
 
                 return {
+                    album: track.album,
                     artist: track.artists[0].name,
                     title: track.name,
                     uri: track.uri,
@@ -54,21 +77,28 @@ export default function Dashboard({ code }) {
             <input
                 aria-label="Search"
                 className="dashboard-search"
-                onChange={e => setSearch(e.target.value)}
+                onChange={e => searchTrack(e.target.value)}
                 placeholder="Search Songs/Artists"
                 type="text"
                 value={search}
             />
-            <div className="search-results">
+            <div className={!lyrics ? "search-results" : "lyrics-results"}>
                 {searchResults.map(item => (
                     <div className="search-results-item" key={item.uri} onClick={() => selectTrack(item)}>
+                        {console.log('ALBUM', item)}
                         <img className="search-results-item-img" src={item.albumUrl} alt="" />
                         <div>
-                            <h2>{item.title}</h2>
-                            <h3>{item.artist}</h3>
+                            <h3>{item.title}</h3>
+                            <p>{item.album.name}</p>
+                            <h4>{item.artist}</h4>
                         </div>
                     </div>
                 ))}
+                {searchResults.length === 0 && (
+                    <div className="lyric-content">
+                        <p>{lyrics}</p>
+                    </div>
+                )}
             </div>
             <div>
                 <Player accessToken={accessToken} trackUri={playingTrack?.uri} />

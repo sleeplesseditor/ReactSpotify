@@ -1,13 +1,14 @@
 $font-primary: #000;
 
 .dashboard-search {
-    margin: 1rem;
+    margin: 2rem 1rem;
     padding: 0.5rem;
 }
 
 input[type=text] {
     width: 10%;
     transition: width 0.4s ease-in-out;
+    margin-top: 10px;
 }
 
 input[type=text]:focus {
@@ -19,13 +20,13 @@ input[type=text]:focus {
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(1, 4fr);
     grid-gap: 1rem;
-    padding: 1rem;
+    padding: 0 1rem;
 
     &-item {
         display: flex;
         flex-direction: row;
         align-items: center;
-        padding: 0rem 1rem;
+        padding: 0.5rem 1rem;
         border: 1px solid black;
         border-radius: 5px;
         cursor: pointer;
@@ -42,12 +43,28 @@ input[type=text]:focus {
             margin-right: 1rem;
         }
 
-        h2 {
-
+        h3, h4, p {
+            margin: 0;
         }
 
-        h3 {
+        h4 {
             color: lighten($font-primary, 30%);
+        }
+        
+    }
+}
+
+.lyrics-results {
+    height: 80vh;
+    overflow-y: auto;
+
+    .lyric-content {
+        white-space: pre;
+        text-align: center;
+        margin: 0 1rem;
+
+        p {
+            word-wrap: none;
         }
     }
 }
